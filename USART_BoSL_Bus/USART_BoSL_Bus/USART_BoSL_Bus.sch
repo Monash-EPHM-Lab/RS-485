@@ -4,9 +4,9 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
+Title "BoSL Bus Converter"
+Date "2020-07-22"
+Rev "0.1.0"
 Comp ""
 Comment1 ""
 Comment2 ""
