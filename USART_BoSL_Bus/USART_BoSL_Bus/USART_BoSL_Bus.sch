@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "BoSL Bus Converter"
-Date "2020-07-22"
-Rev "0.1.0"
+Date "2020-08-06"
+Rev "0.1.1"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -67,17 +67,6 @@ Text GLabel 2200 4350 0    50   Input ~ 0
 RST\5V
 Wire Notes Line
 	8600 3900 8150 3900
-$Comp
-L Connector_Generic:Conn_01x06 J2
-U 1 1 5F0D9AE5
-P 2950 5000
-F 0 "J2" H 2850 4400 50  0000 L CNN
-F 1 "Conn_01x06" H 2700 4550 50  0000 L CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical" H 2950 5000 50  0001 C CNN
-F 3 "~" H 2950 5000 50  0001 C CNN
-	1    2950 5000
-	0    -1   1    0   
-$EndComp
 $Comp
 L power:+3V3 #PWR07
 U 1 1 5F111457
@@ -223,46 +212,24 @@ F 3 "" H 6650 4000 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5550 4200 5650 4200
-$Comp
-L Connector_Generic:Conn_01x08 J4
-U 1 1 5F12F8E9
-P 7950 4300
-F 0 "J4" H 7868 3675 50  0000 C CNN
-F 1 "Conn_01x08" H 7750 3750 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 7950 4300 50  0001 C CNN
-F 3 "~" H 7950 4300 50  0001 C CNN
-	1    7950 4300
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x08 J3
-U 1 1 5F18ED8A
-P 7550 4300
-F 0 "J3" H 7468 3675 50  0000 C CNN
-F 1 "Conn_01x08" H 7350 3750 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 7550 4300 50  0001 C CNN
-F 3 "~" H 7550 4300 50  0001 C CNN
-	1    7550 4300
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
-	7750 4000 8150 4000
+	7750 4000 8100 4000
 Connection ~ 8150 4000
 Wire Wire Line
-	8150 4100 7750 4100
+	8150 4100 8100 4100
 Connection ~ 8150 4100
 Wire Wire Line
-	7750 4200 8150 4200
+	7750 4200 8100 4200
 Wire Wire Line
-	8150 4300 7750 4300
+	8150 4300 8100 4300
 Wire Wire Line
-	7750 4400 8150 4400
+	7750 4400 8100 4400
 Wire Wire Line
-	8150 4500 7750 4500
+	8150 4500 8100 4500
 Wire Wire Line
-	7750 4600 8150 4600
+	7750 4600 8100 4600
 Wire Wire Line
-	8150 4700 7750 4700
+	8150 4700 8100 4700
 $Comp
 L Connector:6P6C J1
 U 1 1 5F1B1BC5
@@ -375,4 +342,61 @@ Wire Wire Line
 	5300 4300 5650 4300
 Wire Wire Line
 	5300 4000 5550 4000
+$Comp
+L Connector:Screw_Terminal_01x06 J2
+U 1 1 5F2B815C
+P 2950 5000
+F 0 "J2" V 2822 4612 50  0000 R CNN
+F 1 "Screw_Terminal_01x06" V 2913 4612 50  0000 R CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-6-3.5-H_1x06_P3.50mm_Horizontal" H 2950 5000 50  0001 C CNN
+F 3 "~" H 2950 5000 50  0001 C CNN
+	1    2950 5000
+	0    -1   1    0   
+$EndComp
+Connection ~ 8100 4000
+Wire Wire Line
+	8100 4000 8150 4000
+Connection ~ 8100 4100
+Wire Wire Line
+	8100 4100 7750 4100
+Connection ~ 8100 4200
+Wire Wire Line
+	8100 4200 8150 4200
+Connection ~ 8100 4300
+Wire Wire Line
+	8100 4300 7750 4300
+Connection ~ 8100 4400
+Wire Wire Line
+	8100 4400 8150 4400
+Connection ~ 8100 4500
+Wire Wire Line
+	8100 4500 7750 4500
+Connection ~ 8100 4600
+Wire Wire Line
+	8100 4600 8150 4600
+Connection ~ 8100 4700
+Wire Wire Line
+	8100 4700 7750 4700
+$Comp
+L Connector_Generic:Conn_01x08 J4
+U 1 1 5F12F8E9
+P 7900 4300
+F 0 "J4" H 7818 3675 50  0000 C CNN
+F 1 "Conn_01x08" H 7700 3750 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 7900 4300 50  0001 C CNN
+F 3 "~" H 7900 4300 50  0001 C CNN
+	1    7900 4300
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x08 J3
+U 1 1 5F18ED8A
+P 7550 4300
+F 0 "J3" H 7468 3675 50  0000 C CNN
+F 1 "Conn_01x08" H 7350 3750 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 7550 4300 50  0001 C CNN
+F 3 "~" H 7550 4300 50  0001 C CNN
+	1    7550 4300
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC
