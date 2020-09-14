@@ -1,6 +1,4 @@
-#include "src/I2C.h"
-#include <LowPower.h>
-#include "src/RS485sensor.h"
+#include "src/RS485logger.h"
 
 
 #define DE 5
@@ -9,43 +7,22 @@ void setup() {
 	
 	
 	
-	RS485.begin(9600, 0x01);
-	RS485.print('R');
+	RS485.begin(9600, 0x00);
+	//RS485.print('R');
 	RS485.listen();
 }
 
 void loop() {
-	uint8_t cmd;
-	bool addr_match = false;
-	sleepF();
-   
-  while(RS485.available() > 0) {
-    cmd = RS485.read();
+	delay(1000);
+	RS485.sendcmd(0x01, 'P');
 	
-	if (cmd == RS485.address){
-		addr_match = true;
-		continue;
+	while(RS485.available() > 0){
+		char cmd = RS485.read();
+		Serial.print(cmd);
 	}
-	if(addr_match){
-		if (cmd == 'P') {getPress();}
-		if (cmd == 'S') {sleepF();}
-		if (cmd == 'I') {getInf();}
-    }
-	
-	
-  }
 }
 
-void getPress(){
-	RS485.write('V');
-	// I2c.begin();
-	// I2c.write(0x78, 0xAC);
-	// I2c.read(0x78, 6);
-	// for (int i=0; i<=5; i++) {
-      // Serial.print(I2c.receive());
-    // }
-	// Serial.println();
-}
+
 
 void sleepF() {
   RS485.sleep();

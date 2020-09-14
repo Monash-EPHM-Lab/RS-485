@@ -1,4 +1,4 @@
-///BoSL RS485 Library///
+///BoSL RS485 Logger Library///
 //This library defines a standard for interfacing sensors over the BoSL bus//
 
 //I think the way we want to do this is to wake up all devices on a WKE pulse
@@ -21,7 +21,6 @@
 //termination (end)
 //
 
-ABCDEF GH I JKL MNO PQR ST UVW XYZ
 
 /////Address Table////
 //0x00 -- Host
@@ -36,34 +35,38 @@ ABCDEF GH I JKL MNO PQR ST UVW XYZ
 
 
 
-class RS485Bus
+class RS485L
 {
   private:
 	bool islistening;
-	bool master;
+
 	
   public:
+	int address;
 	void listen();
   
     template <typename T> void print(T);
 	template <typename T> void println(T);
+	void write(char);
 	
+	void sendcmd (int,int);
 	void sleep();
+	void wakedevices();
 	int read();
-	void begin(long);
+	void begin(long, int);
 	void endlisten(bool);
 	//void RS485();
 	void completeTx();
 	int available();
 
-	RS485Bus();
+	RS485L();
   
     
 };
 
 
 
-extern RS485Bus RS485;
+extern RS485L RS485;
 
 
 
