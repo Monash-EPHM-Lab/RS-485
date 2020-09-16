@@ -1,7 +1,7 @@
+
 #include "src/RS485logger.h"
 
 
-#define DE 5
 
 void setup() {
 	

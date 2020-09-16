@@ -1,4 +1,4 @@
-///BoSL RS485 Sensor Library///
+///BoSL RS485 Logger Library///
 //This library defines a standard for interfacing sensors over the BoSL bus//
 
 //I think the way we want to do this is to wake up all devices on a WKE pulse
@@ -23,35 +23,38 @@
 
 
 /////Address Table////
-//0x00 -- Logger
+//0x00 -- Host
 //0x01 -- BoSL Depth Probe
 
 
 
 #include <Arduino.h>
+//#include "RS485args.h"
 
 #ifndef RS485_h
 #define RS485_h
 
-
-
-class RS485S
+class RS485L
 {
   private:
 	volatile bool islistening;
 	volatile bool istransmitting;
-	bool checktransmitt();
 	
   public:
 	int address;
 	void listen();
+
+	bool checktransmitt();
   
-  
-	virtual void write(char);
     template <typename T> void print(T);
 	template <typename T> void println(T);
+	void write(char);
 	
+	void sendcmd (uint8_t,char,uint8_t,uint8_t);
+	void sendcmd (uint8_t,char,uint8_t);
+	void sendcmd (uint8_t,char);
 	void sleep();
+	void wakedevices();
 	void wake();
 	int read();
 	void begin(long, int);
@@ -60,14 +63,14 @@ class RS485S
 	void completeTx();
 	int available();
 
-	RS485S();
+	RS485L();
   
     
 };
 
 
 
-extern RS485S RS485;
+extern RS485L RS485;
 
 
 

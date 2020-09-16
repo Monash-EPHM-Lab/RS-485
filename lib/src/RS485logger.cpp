@@ -1,15 +1,18 @@
 #include <Arduino.h>
-#include <SoftwareSerial.h>
+#include "RS485args.h"
 #include "RS485logger.h"
+
+
+#include <SoftwareSerial.h>
 
 #define cbi(sfr, bit)   (_SFR_BYTE(sfr) &= ~_BV(bit))
 #define sbi(sfr, bit)   (_SFR_BYTE(sfr) |= _BV(bit))
 
-#define TX 2
-#define RX 3
-#define WKE 10
-#define DE 6
-#define RE 7
+// #define TX 2
+// #define RX 3
+// #define WKE 10
+// #define DE 6
+// #define RE 7
 
 
 SoftwareSerial SerialRS(TX,RX);
@@ -107,10 +110,28 @@ void RS485L::wakedevices(){
 	delay(9);//this pulse should be long enough to wake devices from their sleep mode
 }
 
-void RS485L::sendcmd (int addr ,int cmd){
+void RS485L::sendcmd (uint8_t addr ,char cmd){
 	wakedevices();
 	write(addr);
 	write(cmd);
+	write(0);
+	write(0);
+}
+
+void RS485L::sendcmd (uint8_t addr ,char cmd, uint8_t par1){
+	wakedevices();
+	write(addr);
+	write(cmd);
+	write(par1);
+	write(0);
+}
+
+void RS485L::sendcmd (uint8_t addr ,char cmd, uint8_t par1, uint8_t par2){
+	wakedevices();
+	write(addr);
+	write(cmd);
+	write(par1);
+	write(par2);
 }
 
 void RS485L::sleep(){
@@ -151,3 +172,4 @@ ISR(USART_TX_vect)
 {
 	
 }
+

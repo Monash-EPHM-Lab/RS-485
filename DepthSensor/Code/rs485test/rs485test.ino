@@ -1,3 +1,4 @@
+  
 #include "src/I2C.h"
 #include <LowPower.h>
 #include "src/RS485sensor.h"
@@ -118,4 +119,3 @@ void getInf(){
 	RS485.println(F("Firmware rev: 0.1.2"));
 	RS485.println(F("Hardware rev: 0.1.3"));
 }
-
