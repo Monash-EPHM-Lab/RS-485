@@ -44,6 +44,8 @@ class RS485L
   public:
 	int address;
 	void listen();
+	volatile bool istransmitting;
+	bool checktransmitt();
   
     template <typename T> void print(T);
 	template <typename T> void println(T);
@@ -52,6 +54,7 @@ class RS485L
 	void sendcmd (int,int);
 	void sleep();
 	void wakedevices();
+	void wake();
 	int read();
 	void begin(long, int);
 	void endlisten(bool);

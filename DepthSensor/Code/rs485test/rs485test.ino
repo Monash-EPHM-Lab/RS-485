@@ -5,23 +5,35 @@
 
 #define DE 5
 
+
 void setup() {
 	
 	
-	
-	RS485.begin(9600, 0x01);
-	RS485.print('R');
+	RS485.begin(38400, 0x01);
+	RS485.print("R");
 	RS485.listen();
 }
 
 void loop() {
 	uint8_t cmd;
 	bool addr_match = false;
-	sleepF();
-   
-  while(RS485.available() > 0) {
-    cmd = RS485.read();
 	
+	RS485.write('V');
+
+	sleepF();
+	
+	//wait for commands
+  for(int i = 0; i<500; i++){
+	  if (RS485.available()){
+		  break;
+	  }
+	  delayMicroseconds(10);
+  }
+	//hmm we need to think about this a bit more carefully we need to make sure it knows when to start transmitting maybe we have commands of a fixed length or have a stop bit
+  while(RS485.available() > 0) {
+	delayMicroseconds(400);//this time is long enough so that the next character can be transmitted
+    cmd = RS485.read();
+
 	if (cmd == RS485.address){
 		addr_match = true;
 		continue;
@@ -37,7 +49,7 @@ void loop() {
 }
 
 void getPress(){
-	RS485.write('V');
+	RS485.write('Q');
 	// I2c.begin();
 	// I2c.write(0x78, 0xAC);
 	// I2c.read(0x78, 6);
@@ -49,7 +61,9 @@ void getPress(){
 
 void sleepF() {
   RS485.sleep();
+
   LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+	RS485.wake();
 }
 
 

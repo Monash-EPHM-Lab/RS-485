@@ -15,6 +15,7 @@ RS485S::RS485S(void){
 	digitalWrite(DE,LOW);
 	
 	islistening = false;
+	istransmitting = false;
 }
 
 void RS485S::write(char value){
@@ -23,7 +24,7 @@ void RS485S::write(char value){
   }
   digitalWrite(DE,HIGH);
   Serial.write(value); 
-  
+  istransmitting = true;
 }
 
 template<typename T> void RS485S::print(T value){
@@ -32,7 +33,7 @@ template<typename T> void RS485S::print(T value){
   }
   digitalWrite(DE,HIGH);
   Serial.print(value); 
-  
+  istransmitting = true;
 }
 //instantiate template functions
 template void RS485S::print<__FlashStringHelper const*>(__FlashStringHelper const*);
@@ -47,7 +48,7 @@ template<typename T> void RS485S::println(T value){
   }
   digitalWrite(DE,HIGH);
   Serial.println(value); 
-  
+  istransmitting = true;
 }
 //instantiate template functions
 template void RS485S::println<__FlashStringHelper const*>(__FlashStringHelper const*);
@@ -64,6 +65,8 @@ void RS485S::listen(){
 }
 
 void RS485S::completeTx(){
+	istransmitting = false;
+	
 	digitalWrite(DE,LOW);
 	if (islistening){
 		listen();
@@ -81,10 +84,20 @@ void RS485S::endlisten(bool pause = 0){
 	}
 }
 
-void RS485S::sleep(){
-	endlisten(true)
+bool RS485S::checktransmitt(){
+	return istransmitting;
+}
 
+void RS485S::sleep(){
+
+	// while ((UCSR0A & _BV (TXC0)) == 0){}
+	while(checktransmitt()){}
+
+	endlisten(true);
+	
+	
 	digitalWrite(DE,LOW);
+	
 	//enable interrupts on WKE
 	sbi(EIMSK,INT0);
 }
@@ -98,9 +111,9 @@ void RS485S::begin(long baud, int addr){
 	Serial.begin(baud);
 	//TX complete interrupt
 	sbi(UCSR0B, TXCIE0);
-	//WKE setup interrupt
-	sbi(EICRA,ISC01);
-	sbi(EICRA,ISC00);
+	//WKE setup interrupt //low level generates interupt
+	cbi(EICRA,ISC01);
+	cbi(EICRA,ISC00);
 	//set device address
 	address = addr;
 	
@@ -108,11 +121,13 @@ void RS485S::begin(long baud, int addr){
 }
 
 void RS485S::wake(){
+	//clear interrupts on WKE
+	cbi(EIMSK,INT0);
+	
 	if (islistening){
 		listen();
 	}
-	//enable interrupts on WKE
-	sbi(EIMSK,INT0);
+
 }
 
 RS485S RS485 = RS485S();
@@ -125,5 +140,5 @@ ISR(USART_TX_vect)
 
 ISR(INT0_vect)
 {
-	RS485.wake();
+	cbi(EIMSK,INT0);
 }

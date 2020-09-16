@@ -6,28 +6,29 @@
 void setup() {
 	
 	
-	
-	RS485.begin(9600, 0x00);
+	Serial.begin(9600);
+	RS485.begin(38400, 0x00);
 	//RS485.print('R');
 	RS485.listen();
 }
 
 void loop() {
+	Serial.println('T');
+	RS485.sendcmd(0x01, 'I');
 	delay(1000);
-	RS485.sendcmd(0x01, 'P');
 	
 	while(RS485.available() > 0){
 		char cmd = RS485.read();
-		Serial.print(cmd);
+		Serial.write(cmd);
 	}
 }
 
 
 
-void sleepF() {
-  RS485.sleep();
-  LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
-}
+// void sleepF() {
+  // RS485.sleep();
+  // LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+// }
 
 
 

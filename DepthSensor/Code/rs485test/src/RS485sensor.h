@@ -38,14 +38,16 @@
 class RS485S
 {
   private:
-	bool islistening;
+	volatile bool islistening;
+	volatile bool istransmitting;
+	bool checktransmitt();
 	
   public:
 	int address;
 	void listen();
   
   
-	void write(char);
+	virtual void write(char);
     template <typename T> void print(T);
 	template <typename T> void println(T);
 	
