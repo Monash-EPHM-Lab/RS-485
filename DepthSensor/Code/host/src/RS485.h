@@ -39,12 +39,16 @@ class RS485L
   private:
 	volatile bool islistening;
 	volatile bool istransmitting;
+	char cmd;
+	uint8_t parA;
+	uint8_t parB;
+	uint8_t address;
 	
   public:
-	int address;
 	void listen();
 
 	bool checktransmitt();
+	uint8_t getaddress();
   
     template <typename T> void print(T);
 	template <typename T> void println(T);
@@ -53,15 +57,21 @@ class RS485L
 	void sendcmd (uint8_t,char,uint8_t,uint8_t);
 	void sendcmd (uint8_t,char,uint8_t);
 	void sendcmd (uint8_t,char);
+	
+	bool parsecmd();
+	char getcmd();
+	uint8_t getparA();
+	uint8_t getparB();
+	
 	void sleep();
 	void wakedevices();
 	void wake();
 	int read();
-	void begin(long, int);
+	void begin(long, uint8_t);
 	void endlisten(bool);
-	//void RS485();
 	void completeTx();
 	int available();
+	
 
 	RS485L();
   
