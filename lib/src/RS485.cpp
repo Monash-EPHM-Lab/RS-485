@@ -204,8 +204,10 @@ template<typename T> void RS485L::print(T value){
 template void RS485L::print<__FlashStringHelper const*>(__FlashStringHelper const*);
 template void RS485L::print<char const*>(char const*);
 template void RS485L::print<char>(char);
+template void RS485L::print<char*>(char*);
 template void RS485L::print<int>(int);
 template void RS485L::print<double>(double);
+template void RS485L::print<float>(float);
 
 //println value to serial
 template<typename T> void RS485L::println(T value){
@@ -223,8 +225,10 @@ template<typename T> void RS485L::println(T value){
 template void RS485L::println<__FlashStringHelper const*>(__FlashStringHelper const*);
 template void RS485L::println<char const*>(char const*);
 template void RS485L::println<char>(char);
+template void RS485L::println<char*>(char*);
 template void RS485L::println<int>(int);
 template void RS485L::println<double>(double);
+template void RS485L::println<float>(float);
 
 //function to wake sensors and send a command over the RS-485 bus
 //commands are 4 bytes long, this fill in the final bytes with zeros

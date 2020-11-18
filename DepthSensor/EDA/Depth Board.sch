@@ -4,10 +4,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "RS-485 All-in-one Probe"
+Date "2020-11-18"
+Rev "0.1.0"
+Comp "Monash BoSL"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -193,17 +193,6 @@ Wire Notes Line
 Wire Wire Line
 	2200 3850 2200 4750
 $Comp
-L MCU_Microchip_ATmega:ATmega328P-AU U1
-U 1 1 5F06A751
-P 5800 4350
-F 0 "U1" H 5800 4400 50  0000 C CNN
-F 1 "ATmega328P-AU" H 5800 4300 50  0000 C CNN
-F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 5800 4350 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5800 4350 50  0001 C CNN
-	1    5800 4350
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3V3 #PWR0101
 U 1 1 5F073929
 P 5800 2850
@@ -293,45 +282,18 @@ Wire Wire Line
 Wire Wire Line
 	4900 2750 4900 3150
 Connection ~ 4900 3150
-$Comp
-L Connector_Generic:Conn_01x04 Y1
-U 1 1 5F0833E4
-P 7400 3750
-F 0 "Y1" H 7480 3742 50  0000 L CNN
-F 1 "8MHz" H 7480 3651 50  0000 L CNN
-F 2 "SamacSys_Parts:Ralton_Crystal" H 7400 3750 50  0001 C CNN
-F 3 "~" H 7400 3750 50  0001 C CNN
-	1    7400 3750
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0103
-U 1 1 5F0841E6
-P 7200 3750
-F 0 "#PWR0103" H 7200 3500 50  0001 C CNN
-F 1 "GND" V 7205 3622 50  0000 R CNN
-F 2 "" H 7200 3750 50  0001 C CNN
-F 3 "" H 7200 3750 50  0001 C CNN
-	1    7200 3750
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7200 3850 7200 3750
-Connection ~ 7200 3750
 Wire Wire Line
 	6400 3850 6850 3850
 Wire Wire Line
 	6850 3850 6850 3950
 Wire Wire Line
 	6850 3950 7200 3950
-Connection ~ 7200 3950
 Wire Wire Line
 	6400 3750 6850 3750
 Wire Wire Line
 	6850 3750 6850 3650
 Wire Wire Line
 	6850 3650 7200 3650
-Connection ~ 7200 3650
 Text GLabel 1900 5800 2    50   Input ~ 0
 H_GREEN
 Text GLabel 1900 5300 2    50   Input ~ 0
@@ -352,8 +314,8 @@ Wire Notes Line
 	2350 5900 1900 5900
 Wire Notes Line
 	1900 5900 1900 5250
-Text Notes 1950 5250 0    50   ~ 0
-BOSL BUS
+Text Notes 1900 5250 0    50   ~ 0
+CAT-5 Cable
 Wire Wire Line
 	1900 5800 1750 5800
 Wire Wire Line
@@ -516,7 +478,7 @@ L power:+3V3 #PWR06
 U 1 1 5F1B8F7A
 P 7300 5050
 F 0 "#PWR06" H 7300 4900 50  0001 C CNN
-F 1 "+3V3" H 7315 5223 50  0000 C CNN
+F 1 "+3V3" H 7400 5200 50  0000 C CNN
 F 2 "" H 7300 5050 50  0001 C CNN
 F 3 "" H 7300 5050 50  0001 C CNN
 	1    7300 5050
@@ -660,10 +622,56 @@ L power:GND #PWR07
 U 1 1 5F1B8F80
 P 7300 4950
 F 0 "#PWR07" H 7300 4700 50  0001 C CNN
-F 1 "GND" H 7200 4800 50  0000 C CNN
+F 1 "GND" H 7300 4800 50  0000 C CNN
 F 2 "" H 7300 4950 50  0001 C CNN
 F 3 "" H 7300 4950 50  0001 C CNN
 	1    7300 4950
 	-1   0    0    1   
+$EndComp
+$Comp
+L Device:Crystal_GND23 Y1
+U 1 1 5FB48044
+P 7200 3800
+F 0 "Y1" V 7100 3950 50  0000 L CNN
+F 1 "8MHz" V 7300 3950 50  0000 L CNN
+F 2 "SamacSys_Parts:Ralton_Crystal" H 7200 3800 50  0001 C CNN
+F 3 "~" H 7200 3800 50  0001 C CNN
+	1    7200 3800
+	0    1    1    0   
+$EndComp
+Connection ~ 7200 3650
+Connection ~ 7200 3950
+$Comp
+L power:GND #PWR?
+U 1 1 5FB4956B
+P 7000 3800
+F 0 "#PWR?" H 7000 3550 50  0001 C CNN
+F 1 "GND" V 7005 3672 50  0000 R CNN
+F 2 "" H 7000 3800 50  0001 C CNN
+F 3 "" H 7000 3800 50  0001 C CNN
+	1    7000 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FB49C76
+P 7400 3800
+F 0 "#PWR?" H 7400 3550 50  0001 C CNN
+F 1 "GND" V 7405 3672 50  0000 R CNN
+F 2 "" H 7400 3800 50  0001 C CNN
+F 3 "" H 7400 3800 50  0001 C CNN
+	1    7400 3800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-AU U1
+U 1 1 5F06A751
+P 5800 4350
+F 0 "U1" H 5800 4400 50  0000 C CNN
+F 1 "ATmega328P-AU" H 5800 4300 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 5800 4350 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5800 4350 50  0001 C CNN
+	1    5800 4350
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
